@@ -19,7 +19,7 @@ function App() {
     console.log('in the customers', customers),
     <div className="App">
       <header className="App-header">
-       <p>Hello</p>
+       <p>Hello World</p>
       </header>
     </div>
   );
