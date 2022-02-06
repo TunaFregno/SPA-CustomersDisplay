@@ -1,26 +1,28 @@
+import React from 'react';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import Header from './components/Header';
+import ClientCard from './components/ClientsCard';
+import SideNav from './components/SideNav';
 
 function App() {
-  const [customers, setCustomers] = useState([]);
-
-  useEffect(() => {
-
-    axios.get('http://myjson.dit.upm.es/api/bins/bw9t')
-      .then((res) => {
-        console.log(res);
-        setCustomers(res.data)
-      })
-      .catch((err) => console.log(err))
-  }, [])
 
   return (
-    console.log('in the customers', customers),
-    <div className="App">
-      <header className="App-header">
-       <p>Hello World</p>
-      </header>
+
+    <div className='outterbox'>
+      <Header/>
+      <div className='innerbox'> 
+        <Row className='Row'>
+          <Col sm={5} className='Col'>
+            <SideNav/>
+          </Col>
+          <Col sm={7} className='Col'>
+            <ClientCard/>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }
