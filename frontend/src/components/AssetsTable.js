@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 
 function AssetsTable() {
   return (
-    <Table striped hover>
+    <Table striped borderless hover>
       <thead>
         <tr>
           <th>Isin</th>

@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Accordion from 'react-bootstrap/Accordion';
 import PortfolioGrid from './PortfolioGrid';
-import AssetsTable from './AssetsTable';
+import AssetsAccordion from './AssetsAccordion';
 
 function CenteredModal(props) {
     return (
@@ -22,7 +22,9 @@ function CenteredModal(props) {
                     <Accordion.Item eventKey="0">
                         <Accordion.Header className='fw-bold'>Assets</Accordion.Header>
                         <Accordion.Body>
-                            <AssetsTable/>
+
+                            <AssetsAccordion/>
+                            
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>

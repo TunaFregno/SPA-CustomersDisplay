@@ -38,7 +38,7 @@ function SideNav() {
             <Button variant="outline-danger">Search</Button>
         </Form>
 
-        <Image src={people} fluid style={{ width: '27rem'}} className='mt-4' />
+        <Image src={people} fluid style={{ width: '29rem'}} className='mt-4' />
       </div>
     </>
 
