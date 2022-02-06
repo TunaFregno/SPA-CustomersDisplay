@@ -1,7 +1,8 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import GridInfo from './Grid';
+import Accordion from 'react-bootstrap/Accordion';
+import PortfolioGrid from './PortfolioGrid';
+import AssetsTable from './AssetsTable';
 
 function CenteredModal(props) {
     return (
@@ -12,15 +13,20 @@ function CenteredModal(props) {
         centered>        
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Assets
+                    Portfolio:
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <GridInfo/>
+                <PortfolioGrid/>
+                <Accordion defaultActiveKey="1" className='mt-3'>
+                    <Accordion.Item eventKey="0">
+                        <Accordion.Header className='fw-bold'>Assets</Accordion.Header>
+                        <Accordion.Body>
+                            <AssetsTable/>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
             </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
         </Modal>
     );
 }

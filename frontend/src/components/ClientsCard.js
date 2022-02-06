@@ -43,11 +43,11 @@ function ClientCard() {
         <>
             <ul className='ul-box'>
                 
-            { customers.map((customer, i) => {
+            { customers.sort().map((customer, i) => {
                 return (
-                <Card style={{ width: '25rem', height: '23rem'}} className='m-2 cardStyle'>
+                <Card key={i} style={{ width: '25rem', height: '23rem'}} className='m-2 cardStyle'>
                   <Card.Img variant="top" src={pic} style={{ width: '10rem'}} className='mt-3'/>
-                  <Card.Body key={i}>
+                  <Card.Body>
                     <Card.Title>{customer.lastName}, {customer.firstName}</Card.Title>
                     <Card.Text  className='mb-2' >
                       Risk Profile: {customer.riskProfile} <br/>
