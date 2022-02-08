@@ -1,14 +1,15 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Accordion from 'react-bootstrap/Accordion';
 import PortfolioGrid from './PortfolioGrid';
-import AssetsAccordion from './AssetsAccordion';
+
 
 function CenteredModal(props) {
+    //console.log('in the props', props.data)
+    
     return (
         <Modal
         {...props}
-        size="lg"
+        size="xl"
         aria-labelledby="contained-modal-title-vcenter"
         centered>        
             <Modal.Header closeButton>
@@ -16,18 +17,14 @@ function CenteredModal(props) {
                     Portfolio:
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <PortfolioGrid/>
-                <Accordion defaultActiveKey="1" className='mt-3'>
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header className='fw-bold'>Assets</Accordion.Header>
-                        <Accordion.Body>
 
-                            <AssetsAccordion/>
-                            
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
+            <Modal.Body >
+                
+                <PortfolioGrid 
+                data={props.data} 
+                index={props.index}
+                portfolios={props.portfolios}/>
+
             </Modal.Body>
         </Modal>
     );
