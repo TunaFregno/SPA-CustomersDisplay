@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import pic from '../images/info.svg';
 import CenteredModal from './Modal'
 
-function ClientCard() {
+function ClientCard({data, searchResults}) {
   
-  const [data, setData] = useState([]);
   const [index, setIndex] = useState(0);
   const [portfolios, setPortfolios] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-
-  useEffect(() => {
-
-    axios.get('http://myjson.dit.upm.es/api/bins/bw9t')
-    .then((res) => {
-        console.log(res);
-        setData(res.data)
-    })
-    .catch((err) => console.log(err))
-
-  }, [])
 
 
   const storingIndex = (index, customer) => {
@@ -38,10 +25,13 @@ function ClientCard() {
 
   return (
     console.log('in the data ', data),
+    console.log('in the card search', searchResults),
     <>
       <ul className='ul-box'>
-                
-        { data.sort().map((customer, i) => {
+        
+        { data.sort((a, b)=> {
+          if (a.lastName.toLowerCase() < b.lastName.toLowerCase()) return -1;
+          }).map((customer, i) => {
           return (
             <Card key={i} style={{ width: '25rem', height: '23rem'}} className='m-2 cardStyle'>
               <Card.Img variant="top" src={pic} style={{ width: '10rem'}} className='mt-3'/>

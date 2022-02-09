@@ -3,15 +3,13 @@ import people from '../images/dashpic.svg';
 import  NavDropdown  from 'react-bootstrap/NavDropdown';
 import  Form  from 'react-bootstrap/Form';
 import  FormControl  from 'react-bootstrap/FormControl';
-import  Button  from 'react-bootstrap/Button';
 import  Image  from 'react-bootstrap/Image';
 
-function SideNav() {
-
-
+function SideNav({searchFunc}) {
+  //console.log('in the search', props)
   return (
     <>
-      <div  className='sideNavStyle'>
+      <div className='sideNavStyle'>
         <p className='sideTitle mb-0 fw-bold'>Customer</p>
         <p className='sideTitle fs-1 lh-1 ms-1'> Selection</p>
 
@@ -34,8 +32,7 @@ function SideNav() {
           placeholder="Search"
           className="me-3"
           aria-label="Search"
-          />
-            <Button variant="outline-danger">Search</Button>
+          onChange={ e => searchFunc( e.target.value)}/>
         </Form>
 
         <Image src={people} fluid style={{ width: '29rem'}} className='mt-4' />
