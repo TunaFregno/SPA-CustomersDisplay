@@ -21,8 +21,6 @@ function CenteredModal(props) {
             <Modal.Body >
                 
                 <PortfolioGrid 
-                data={props.data} 
-                index={props.index}
                 portfolios={props.portfolios}/>
 
             </Modal.Body>

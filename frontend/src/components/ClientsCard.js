@@ -2,30 +2,40 @@ import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import pic from '../images/info.svg';
-import CenteredModal from './Modal'
+import CenteredModal from './Modal';
+import { assetAssociatedRiskFunc } from './MathFuncs/AssetsAssociatedRiskFunc';
 
-function ClientCard({data, searchResults}) {
+function ClientCard({data}) {
   
-  const [index, setIndex] = useState(0);
   const [portfolios, setPortfolios] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-
-
-  const storingIndex = (index, customer) => {
-    //console.log('in the index', index);
-    setIndex(index);
-    setModalShow(true); 
-
+  
+  const displayStatus = (customer) => {
     const portfolioArr = [];
+    getAssets(customer)
     customer.portfolios.forEach((portfolio) => portfolioArr.push(portfolio));
-    setPortfolios(portfolioArr)
-    console.log('in the portfolios arr', portfolios)
+    return portfolioArr.map((portfolio, i) => `▶️${(portfolio.restrictionStatus).charAt(0).toUpperCase() + (portfolio.restrictionStatus).slice(1)} `)
   }
 
+  const getAssets = (customer) => {
+    
+    const assetsoArr = [];
+    customer.portfolios.forEach((portfolio) => {
+      portfolio.assets.forEach((asset) => assetsoArr.push(asset))
+    })
+
+    assetAssociatedRiskFunc(assetsoArr)
+  }
+
+  const getPortfolios = (customer) => {
+    setModalShow(true); 
+    const portfolioArr = [];
+    customer.portfolios.forEach((portfolio) => {portfolioArr.push(portfolio)});
+    return setPortfolios(portfolioArr)
+  }
 
   return (
     console.log('in the data ', data),
-    console.log('in the card search', searchResults),
     <>
       <ul className='ul-box'>
         
@@ -40,12 +50,12 @@ function ClientCard({data, searchResults}) {
                 <Card.Text  className='mb-2' >
                   Risk Profile: {customer.riskProfile} <br/>
                   Net Worth<br/>
-                  Restriction Status <br/>
+                  Restriction Status: {displayStatus(customer)} <br/>
                   Capital Gain<br/>  
                 </Card.Text>
                 <div className='mt-3 cardBtnBox' >
                   <p  className='mb-1 fw-bold' >Portfolio:</p>
-                  <Button variant="primary" onClick={() => storingIndex(i, customer)}>Expand</Button>
+                  <Button variant="primary" onClick={() => getPortfolios( customer)}>Expand</Button>
                 </div>
               </Card.Body>
             </Card>
@@ -55,7 +65,6 @@ function ClientCard({data, searchResults}) {
 
       <CenteredModal
         data={data}
-        index={index}
         portfolios={portfolios}
         show={modalShow}
         onHide={() => setModalShow(false)}

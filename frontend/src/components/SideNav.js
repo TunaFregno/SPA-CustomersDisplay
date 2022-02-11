@@ -5,7 +5,7 @@ import  Form  from 'react-bootstrap/Form';
 import  FormControl  from 'react-bootstrap/FormControl';
 import  Image  from 'react-bootstrap/Image';
 
-function SideNav({searchFunc}) {
+function SideNav({searchFunc, sortFunc}) {
   //console.log('in the search', props)
   return (
     <>
@@ -15,13 +15,13 @@ function SideNav({searchFunc}) {
 
         <NavDropdown title="Sort by" id="offcanvasNavbarDropdown" className="mt-4">
 
-          <NavDropdown.Item href="#action3">Risk Profile</NavDropdown.Item>
-          <NavDropdown.Item href="#action4">Restriction Status</NavDropdown.Item>
-          <NavDropdown.Item href="#action4">Capital Gain </NavDropdown.Item>
-          <NavDropdown.Item href="#action4">Net Worth</NavDropdown.Item>
+          <NavDropdown.Item onClick={()=> sortFunc('risk')}>Risk Profile</NavDropdown.Item>
+          <NavDropdown.Item onClick={()=> sortFunc('restriction')}>Restriction Status</NavDropdown.Item>
+          <NavDropdown.Item onClick={()=> sortFunc('capital')}>Capital Gain </NavDropdown.Item>
+          <NavDropdown.Item onClick={()=> sortFunc('worth')}>Net Worth</NavDropdown.Item>
           <NavDropdown.Divider />
 
-          <NavDropdown.Item href="#action5">
+          <NavDropdown.Item onClick={()=> sortFunc('data')}>
             Name
           </NavDropdown.Item>
         </NavDropdown>

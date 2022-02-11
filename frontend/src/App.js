@@ -14,6 +14,8 @@ function App() {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
+  //const [sortClicked, setSort] = useState([]);
+
   useEffect(() => {
 
     axios.get('http://myjson.dit.upm.es/api/bins/bw9t')
@@ -21,7 +23,7 @@ function App() {
         console.log(res);
         setData(res.data)
     })
-    .catch((err) => console.log(err))
+    .catch((err) => console.log(err));
 
   }, [])
 
@@ -34,8 +36,39 @@ function App() {
     setSearchResults(newData)
   }
 
+  const sortedByRisk = (key) => {
+    switch (key) {
+      case 'risk' :
+        console.log('in the risk case');
+        //let sortedRisk = data.sort((a, b)=> {
+          //return (b.riskProfile - a.riskProfile) ;
+        //})
+        //setSort(sortedRisk)
+        //console.log('in the risk sorted', sortClicked);
+
+      break;
+      case 'restriction':
+        console.log('in the risk restriction status');
+      break;
+      case 'capital':
+        console.log('in the risk capital gain');
+      break;
+      case 'worth':
+        console.log('in the net worth case');
+      break;
+      case 'data':
+        return data;
+      break;
+   }
+    
+    //matchSorter(data, 'risk', {keys: ['riskProfile']}) 
+    
+  }
+
   return (
     //console.log('in the app search result',searchResults),
+    //console.log('in the risk app', sortClicked),
+    //console.log('in the portfolios arr in app', portfolios),
     <div className='outterbox'>
       <Header/>
       <div className='innerbox'> 
@@ -43,11 +76,13 @@ function App() {
           <Col sm={5} className='Col'>
             <SideNav
             search={search}
-            searchFunc={searchHandler}/>
+            searchFunc={searchHandler}
+            //sortFunc={sortedByRisk}
+           />
           </Col>
           <Col sm={7} className='Col'>
             <ClientCard
-            data={searchResults.length < 1 ? data : searchResults}
+            data={searchResults.length < 1 ? data : searchResults }
             />
           </Col>
         </Row>

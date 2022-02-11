@@ -24,11 +24,11 @@ export const COLUMNS = [
     accessor: "valuePerAsset"
   },
   {
-    Header: "Capital Gain per Asset",
+    Header: "Capital Gain",
     accessor: "capitalGainPerAsset"
   },
   {
-    Header: "Associated Risk per Asset",
+    Header: "Associated Risk",
     accessor: "associatedRiskPerAsset"
   }
         
