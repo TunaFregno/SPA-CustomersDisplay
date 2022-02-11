@@ -13,7 +13,7 @@ function App() {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-
+  
   //const [sortClicked, setSort] = useState([]);
 
   useEffect(() => {
@@ -69,6 +69,7 @@ function App() {
     //console.log('in the app search result',searchResults),
     //console.log('in the risk app', sortClicked),
     //console.log('in the portfolios arr in app', portfolios),
+   
     <div className='outterbox'>
       <Header/>
       <div className='innerbox'> 

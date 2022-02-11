@@ -51,9 +51,8 @@ function AssetsTable({asset}) {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>
-                  {column.render("Header")}
-                  
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render("Header")}     
                   <span>
                     {column.isSorted
                       ? column.isSortedDesc

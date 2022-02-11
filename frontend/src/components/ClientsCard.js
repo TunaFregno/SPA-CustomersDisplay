@@ -3,7 +3,9 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import pic from '../images/info.svg';
 import CenteredModal from './Modal';
-import { assetAssociatedRiskFunc } from './MathFuncs/AssetsAssociatedRiskFunc';
+import getPortfoliosFunc from './Functions/getPortfoliosFunc';
+import getAssetsFunc from './Functions/getAssetsFunc';
+import assetCapitalGainFunc  from './Functions/getClientValues';
 
 function ClientCard({data}) {
   
@@ -11,27 +13,23 @@ function ClientCard({data}) {
   const [modalShow, setModalShow] = useState(false);
   
   const displayStatus = (customer) => {
-    const portfolioArr = [];
-    getAssets(customer)
-    customer.portfolios.forEach((portfolio) => portfolioArr.push(portfolio));
-    return portfolioArr.map((portfolio, i) => `▶️${(portfolio.restrictionStatus).charAt(0).toUpperCase() + (portfolio.restrictionStatus).slice(1)} `)
+    const portfolioArr = getPortfoliosFunc(customer);
+    return portfolioArr.map((portfolio, i) => `${(portfolio.restrictionStatus) === 'clean' ? '🟢': '⭕️' }${(portfolio.restrictionStatus).charAt(0).toUpperCase() + (portfolio.restrictionStatus).slice(1)}  `)
   }
 
-  const getAssets = (customer) => {
-    
-    const assetsoArr = [];
-    customer.portfolios.forEach((portfolio) => {
-      portfolio.assets.forEach((asset) => assetsoArr.push(asset))
+  const aggregatedNetWorth = (customer, string) => {
+    const portfolioArr = getPortfoliosFunc(customer);
+    let assets = [];
+    portfolioArr.forEach((portfolio) => {
+      assets = getAssetsFunc(portfolio)
     })
-
-    assetAssociatedRiskFunc(assetsoArr)
+    return assetCapitalGainFunc(assets, string);
   }
 
   const getPortfolios = (customer) => {
     setModalShow(true); 
-    const portfolioArr = [];
-    customer.portfolios.forEach((portfolio) => {portfolioArr.push(portfolio)});
-    return setPortfolios(portfolioArr)
+    const portfolioArr = getPortfoliosFunc(customer);
+    return setPortfolios(portfolioArr);
   }
 
   return (
@@ -49,9 +47,9 @@ function ClientCard({data}) {
                 <Card.Title>{customer.lastName}, {customer.firstName}</Card.Title>
                 <Card.Text  className='mb-2' >
                   Risk Profile: {customer.riskProfile} <br/>
-                  Net Worth<br/>
                   Restriction Status: {displayStatus(customer)} <br/>
-                  Capital Gain<br/>  
+                  Net Worth: {aggregatedNetWorth(customer, 'networth')}<br/>
+                  Capital Gain: {aggregatedNetWorth(customer, 'capital')}<br/>  
                 </Card.Text>
                 <div className='mt-3 cardBtnBox' >
                   <p  className='mb-1 fw-bold' >Portfolio:</p>
