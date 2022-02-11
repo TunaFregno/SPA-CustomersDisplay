@@ -11,6 +11,7 @@ function ClientCard({data}) {
   
   const [portfolios, setPortfolios] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+
   
   const displayStatus = (customer) => {
     const portfolioArr = getPortfoliosFunc(customer);
@@ -23,7 +24,7 @@ function ClientCard({data}) {
     portfolioArr.forEach((portfolio) => {
       assets = getAssetsFunc(portfolio)
     })
-    return assetCapitalGainFunc(assets, string);
+    return assetCapitalGainFunc(assets, string).toLocaleString();
   }
 
   const getPortfolios = (customer) => {
@@ -37,7 +38,7 @@ function ClientCard({data}) {
     <>
       <ul className='ul-box'>
         
-        { data.sort((a, b)=> {
+        {data.sort((a, b)=> {
           if (a.lastName.toLowerCase() < b.lastName.toLowerCase()) return -1;
           }).map((customer, i) => {
           return (
@@ -49,7 +50,7 @@ function ClientCard({data}) {
                   Risk Profile: {customer.riskProfile} <br/>
                   Restriction Status: {displayStatus(customer)} <br/>
                   Net Worth: {aggregatedNetWorth(customer, 'networth')}<br/>
-                  Capital Gain: {aggregatedNetWorth(customer, 'capital')}<br/>  
+                  Capital Gain: {aggregatedNetWorth(customer, 'capital')}.<br/>  
                 </Card.Text>
                 <div className='mt-3 cardBtnBox' >
                   <p  className='mb-1 fw-bold' >Portfolio:</p>

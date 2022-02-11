@@ -5,23 +5,26 @@ import AssetsTable from './TableComponents/AssetsTable';
 import Table from 'react-bootstrap/Table'
 import getAssetsFunc from './Functions/getAssetsFunc';
 
-
 function PortfolioGrid(props) {
   const [assets, setAssets] = useState([]);
-  const [open, setOpen] = useState(true)
+  const [currentIndex, setIndex] = useState(0);
 
-  const accordionFunc =  (portfolio) => {
-    const assetsoArr = getAssetsFunc(portfolio)
-    
+  const accordionFunc =  (portfolio, i) => {
+    const assetsoArr = getAssetsFunc(portfolio);
+
     setAssets(assetsoArr.sort((a, b)=> {
       if (a.assetName.toLowerCase() < b.assetName.toLowerCase()) return -1;
       })
     )
   }
 
+  //const setCurrentIndex= (i) => {
+    //console.log('index', i)
+    //currentIndex !== i ? document.querySelector('.collapse').remove('show') && setIndex(i) : document.querySelector('.collapse').add('show');
+  //}
 
   return (
-    <Container onHide={() => setOpen(false)}>    
+    <Container>    
       {props.portfolios.map((portfolio, i) => {
         return (
           <>
@@ -51,7 +54,7 @@ function PortfolioGrid(props) {
           </Table>
 
          
-          <Accordion defaultActiveKey="0" key={i} className='mt-3 mb-3' onClick={() => accordionFunc(portfolio)}>
+          <Accordion defaultActiveKey="0" key={i} className='mt-3 mb-3' id={`Accordion${i}`} onClick={() => accordionFunc(portfolio, i)}>
             <Accordion.Item > 
               <Accordion.Header><p className='fw-bold m-0 p-0'>ASSETS</p></Accordion.Header>
               <Accordion.Body>

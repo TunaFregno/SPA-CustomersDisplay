@@ -8,13 +8,13 @@ import './App.css';
 import Header from './components/Header';
 import ClientCard from './components/ClientsCard';
 import SideNav from './components/SideNav';
+import sortClients from './components/Functions/sortClients';
 
 function App() {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  
-  //const [sortClicked, setSort] = useState([]);
+  const [sortClicked, setSort] = useState([]);
 
   useEffect(() => {
 
@@ -25,7 +25,7 @@ function App() {
     })
     .catch((err) => console.log(err));
 
-  }, [])
+  }, [sortClicked, searchResults ])
 
   const searchHandler = (search) => {
     setSearch(search)
@@ -36,40 +36,12 @@ function App() {
     setSearchResults(newData)
   }
 
-  const sortedByRisk = (key) => {
-    switch (key) {
-      case 'risk' :
-        console.log('in the risk case');
-        //let sortedRisk = data.sort((a, b)=> {
-          //return (b.riskProfile - a.riskProfile) ;
-        //})
-        //setSort(sortedRisk)
-        //console.log('in the risk sorted', sortClicked);
-
-      break;
-      case 'restriction':
-        console.log('in the risk restriction status');
-      break;
-      case 'capital':
-        console.log('in the risk capital gain');
-      break;
-      case 'worth':
-        console.log('in the net worth case');
-      break;
-      case 'data':
-        return data;
-      break;
-   }
-    
-    //matchSorter(data, 'risk', {keys: ['riskProfile']}) 
-    
+  const sortedByRisk =(key) => {
+    let dataArr = data;
+    return setSort(sortClients(key, dataArr)) 
   }
 
   return (
-    //console.log('in the app search result',searchResults),
-    //console.log('in the risk app', sortClicked),
-    //console.log('in the portfolios arr in app', portfolios),
-   
     <div className='outterbox'>
       <Header/>
       <div className='innerbox'> 
@@ -78,12 +50,13 @@ function App() {
             <SideNav
             search={search}
             searchFunc={searchHandler}
-            //sortFunc={sortedByRisk}
+            sortFunc={sortedByRisk}
            />
           </Col>
           <Col sm={7} className='Col'>
             <ClientCard
             data={searchResults.length < 1 ? data : searchResults }
+            dataSort={sortClicked}
             />
           </Col>
         </Row>

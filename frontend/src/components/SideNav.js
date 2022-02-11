@@ -17,8 +17,7 @@ function SideNav({searchFunc, sortFunc}) {
 
           <NavDropdown.Item onClick={()=> sortFunc('risk')}>Risk Profile</NavDropdown.Item>
           <NavDropdown.Item onClick={()=> sortFunc('restriction')}>Restriction Status</NavDropdown.Item>
-          <NavDropdown.Item onClick={()=> sortFunc('capital')}>Capital Gain </NavDropdown.Item>
-          <NavDropdown.Item onClick={()=> sortFunc('worth')}>Net Worth</NavDropdown.Item>
+    
           <NavDropdown.Divider />
 
           <NavDropdown.Item onClick={()=> sortFunc('data')}>
